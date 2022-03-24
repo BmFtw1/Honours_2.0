@@ -5,7 +5,7 @@ import random
 import nltk
 import numpy as np
 from nltk.stem import WordNetLemmatizer
-from tensorflow.keras.layers import Dense, Activation, Dropout
+from tensorflow.keras.layers import Dense, Dropout
 from tensorflow.keras.models import Sequential
 from tensorflow.keras.optimizers import SGD
 
@@ -13,22 +13,27 @@ lemmatizer = WordNetLemmatizer()
 
 intents = json.loads(open('intents.json').read())
 
-words = []
-classes = []
-documents = []
+words = []  # for Bow model/ vocabulary for patterns
+classes = []  # for Bow model/vocabulary for tags
+
+documents = []  # store tokenised words and correspoding tags
+
 ignore_letters = ['?', '!', ',', '.']
 
 for intent in intents['intents']:
     for pattern in intent['patterns']:
+        pattern = pattern.lower()
         word_list = nltk.word_tokenize(pattern)
         words.extend(word_list)
         documents.append((word_list, intent['tag']))
+
+        # adding the tag to the classes if its not already there
         if intent['tag'] not in classes:
             classes.append(intent['tag'])
 
 words = [lemmatizer.lemmatize(word) for word in words if word not in ignore_letters]
-words = sorted(set(words))
 
+words = sorted(set(words))
 classes = sorted(set(classes))
 
 pickle.dump(words, open('words.pkl', 'wb'))
@@ -55,10 +60,13 @@ train_x = list(training[:, 0])
 train_y = list(training[:, 1])
 
 model = Sequential()
+#input layer
 model.add(Dense(128, input_shape=(len(train_x[0]),), activation='relu'))
 model.add(Dropout(0.5))
+#hidden layer
 model.add(Dense(64, activation='relu'))
 model.add(Dropout(0.5))
+#output layer
 model.add(Dense(len(train_y[0]), activation='softmax'))
 
 sgd = SGD(lr=0.01, decay=1e-6, momentum=0.9, nesterov=True)
