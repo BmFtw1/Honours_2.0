@@ -16,7 +16,9 @@ classes = pickle.load(open('classes.pkl', 'rb'))
 model = load_model('chatbotmodel.h5')
 
 bot_name = "Bot"
-#clean up user input string
+
+
+# clean up user input string
 def clean_up_sentence(sentence):
     sentence = sentence.lower()
     sentence_words = nltk.word_tokenize(sentence)
@@ -37,7 +39,8 @@ def bag_of_words(sentence):
 
 def predict_class(sentence):
     bow = bag_of_words(sentence)
-    res = model.predict(np.array([bow]))[0] #Extracting probabilities
+    res = model.predict(np.array([bow]))[0]  # Extracting probabilities
+
     ERROR_THRESHOLD = 0.25
     results = [[i, r] for i, r in enumerate(res) if r > ERROR_THRESHOLD]
 
@@ -45,29 +48,25 @@ def predict_class(sentence):
     return_list = []
     for r in results:
         return_list.append({'intent': classes[r[0]], 'probability': str(r[1])})
-    print(return_list)
     return return_list
 
 
 def get_response(intents_list, intents_json):
     tag = intents_list[0]['intent']
+    print(tag)
     list_of_intents = intents_json['intents']
+
     for i in list_of_intents:
         if i['tag'] == tag:
             result = random.choice(i['responses'])
+            print(result)
             break
+
     return result
 
 
-def output(message):
-    if message == "bye" or message == "Goodbye":
-        ints = predict_class(message)
-        res = get_response(ints, intents)
-        return res
-    else:
-        ints = predict_class(message)
-        res = get_response(ints, intents)
-        return res
-
-
-
+def output(sentence):
+    ints = predict_class(sentence)
+    print(ints)
+    res = get_response(ints, intents)
+    return res

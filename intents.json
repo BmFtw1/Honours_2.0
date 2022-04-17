@@ -4,7 +4,7 @@
   "responses": ["Hello!","Hey!","What can I do for you?"]
   },
 
-  {"tag": "uniDescribe",
+  {"tag": "universityDescribe",
   "patterns": ["about university","napier","tell me about napier","about"],
   "responses": ["Edinburgh Napier University is a public university in Edinburgh, Scotland. Napier Technical College, the predecessor of the university, was founded in 1964, taking its name from 16th-century Scottish mathematician and philosopher John Napier."]
   },

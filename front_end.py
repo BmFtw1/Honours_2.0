@@ -65,7 +65,6 @@ class ChatApplication:
     def _insert_message(self, msg, sender):
         if not msg:
             return
-
         self.msg_entry.delete(0, END)
         msg1 = f"{sender}: {msg}\n\n"
         self.text_widget.configure(state=NORMAL)
