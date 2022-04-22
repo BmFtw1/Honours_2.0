@@ -67,6 +67,7 @@ def get_response(intents_list, intents_json):
 
 def output(sentence):
     ints = predict_class(sentence)
+    print(sentence)
     print(ints)
     res = get_response(ints, intents)
     return res

@@ -1,7 +1,7 @@
 import json
 import pickle
 import random
-
+from sklearn.model_selection import StratifiedKFold
 import nltk
 import numpy as np
 from nltk.stem import WordNetLemmatizer
@@ -76,5 +76,10 @@ sgd = SGD(learning_rate=0.01, decay=1e-6, momentum=0.9, nesterov=True)
 model.compile(loss='categorical_crossentropy', optimizer=sgd, metrics=['accuracy'])
 hist = model.fit(np.array(train_x), np.array(train_y), epochs=200, batch_size=5, verbose=1)
 model.save('chatbotmodel.h5', hist)
-
+#evaluate the keras model
+_, accuracy = model.evaluate(np.array(train_x), np.array(train_y))
+print('Accuracy: %.2f' % (accuracy*100))
 print('Done')
+
+
+

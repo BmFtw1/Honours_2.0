@@ -16,7 +16,7 @@
 
   {"tag": "courses",
   "patterns": ["what courses are available", "how many courses are there in this University"],
-  "responses": ["Informatics University Pokhara has been in direct partnership with London Metropolitan University, \nUK to provide enviable higher education in IT and Business to students in Pokhara.\nFor Bachelors Degree in Information Technology we have been offering the specialization in BSc (Hons) Computing.\nFor Bachelors in Business Administration we have been offering the followings:\n\n1. BBA (Marketing) with International Business \n\n2. BBA (Accounting & Finance) with International Business\n\n3. BBA (International Business)"]
+  "responses": ["Edinburgh Napier University has a multitude of courses to select from, to provide enviable higher education in IT and Business to students.\nFor Bachelors Degree in Information Technology we have been offering the specialization in BSc (Hons) Computing.\nFor Bachelors in Business Administration we have been offering the followings:\n\n1. BBA (Marketing) with International Business \n\n2. BBA (Accounting & Finance) with International Business\n\n3. BBA (International Business)"]
   },
 
   {"tag": "general",
